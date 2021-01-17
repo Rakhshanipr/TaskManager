@@ -1,4 +1,4 @@
-package com.example.taskmanager.services;
+package com.example.taskmanager.services.model;
 
 import java.util.UUID;
 
@@ -7,6 +7,12 @@ public class User {
     String userName;
     String password;
     int accessblity;
+
+    public User(String userName, String password, int accessblity) {
+        this.userName = userName;
+        this.password = password;
+        this.accessblity = accessblity;
+    }
 
     public UUID getId() {
         return Id;
