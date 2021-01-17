@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.taskmanager.R;
+import com.example.taskmanager.services.model.State;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,9 +19,12 @@ import com.example.taskmanager.R;
 public class ListTaskFragment extends Fragment {
 
 
-    public static ListTaskFragment newInstance() {
+    public static final String ARGS_INT_STATE = "om.example.taskmanager.view.fragment.ListTaskFragment.int_state";
+
+    public static ListTaskFragment newInstance(int state) {
         ListTaskFragment fragment = new ListTaskFragment();
         Bundle args = new Bundle();
+        args.putInt(ARGS_INT_STATE,state);
         fragment.setArguments(args);
         return fragment;
     }
