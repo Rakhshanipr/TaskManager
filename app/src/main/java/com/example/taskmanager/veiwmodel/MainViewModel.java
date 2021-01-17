@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.taskmanager.adapter.TaskViewPagerAdapter;
 
-public class Main {
+public class MainViewModel {
 
     public static TaskViewPagerAdapter createTaskViewPagerAdapter(Activity activity){
         TaskViewPagerAdapter taskViewPagerAdapter=new TaskViewPagerAdapter((AppCompatActivity)activity);

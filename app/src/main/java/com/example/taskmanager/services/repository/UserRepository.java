@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class UserRepository {
 
-    User sOnlineUser;
+    public static User sOnlineUser;
 
     //region defind stativ method and variable
     private static UserRepository sUserRepository;
@@ -30,12 +30,12 @@ public class UserRepository {
         sUserList.add(user);
     }
 
-    public User getsOnlineUser() {
+    public static User getsOnlineUser() {
         return sOnlineUser;
     }
 
-    public void setsOnlineUser(User sOnlineUser) {
-        this.sOnlineUser = sOnlineUser;
+    public static void setsOnlineUser(User onlineUser) {
+        sOnlineUser = onlineUser;
     }
 
     public void insertList(List<User> users) {

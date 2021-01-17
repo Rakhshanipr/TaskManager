@@ -2,20 +2,16 @@ package com.example.taskmanager.view.fragment;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.taskmanager.R;
 import com.example.taskmanager.databinding.FragmentLoginBinding;
-import com.example.taskmanager.veiwmodel.Login;
+import com.example.taskmanager.veiwmodel.LoginViewModel;
 
 public class LoginFragment extends Fragment {
 
@@ -27,7 +23,7 @@ public class LoginFragment extends Fragment {
     }
 
     FragmentLoginBinding mFragmentLoginBinding;
-    Login mLoginViewModel;
+    LoginViewModel mLoginViewModelViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +37,7 @@ public class LoginFragment extends Fragment {
         mFragmentLoginBinding= DataBindingUtil.inflate(inflater,
                 R.layout.fragment_login,container,false);
         setListners();
-        mLoginViewModel=new Login();
+        mLoginViewModelViewModel =new LoginViewModel();
         return mFragmentLoginBinding.getRoot();
     }
 
@@ -57,7 +53,7 @@ public class LoginFragment extends Fragment {
                             .commit();
                 }*/
 
-                mLoginViewModel.LoginClicked(getActivity(),
+                mLoginViewModelViewModel.LoginClicked(getActivity(),
                         mFragmentLoginBinding.editTextUserName.getText().toString()
                         ,mFragmentLoginBinding.editTextPassword.getText().toString());
 

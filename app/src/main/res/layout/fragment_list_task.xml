@@ -10,6 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_list_task"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#D38B8B" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

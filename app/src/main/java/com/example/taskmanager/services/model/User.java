@@ -3,43 +3,44 @@ package com.example.taskmanager.services.model;
 import java.util.UUID;
 
 public class User {
-    UUID Id;
-    String userName;
-    String password;
-    int accessblity;
+    UUID mId;
+    String mUserName;
+    String mPassword;
+    int mAccessblity;
 
     public User(String userName, String password, int accessblity) {
-        this.userName = userName;
-        this.password = password;
-        this.accessblity = accessblity;
+        this.mUserName = userName;
+        this.mPassword = password;
+        this.mAccessblity = accessblity;
+        mId=UUID.randomUUID();
     }
 
     public UUID getId() {
-        return Id;
+        return mId;
     }
 
 
     public String getUserName() {
-        return userName;
+        return mUserName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.mUserName = userName;
     }
 
     public String getPassword() {
-        return password;
+        return mPassword;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.mPassword = password;
     }
 
     public int getAccessblity() {
-        return accessblity;
+        return mAccessblity;
     }
 
     public void setAccessblity(int accessblity) {
-        this.accessblity = accessblity;
+        this.mAccessblity = accessblity;
     }
 }

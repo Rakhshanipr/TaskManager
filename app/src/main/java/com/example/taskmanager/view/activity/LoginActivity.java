@@ -9,11 +9,10 @@ import android.os.Bundle;
 
 import com.example.taskmanager.R;
 import com.example.taskmanager.services.model.User;
-import com.example.taskmanager.veiwmodel.Login;
-import com.example.taskmanager.view.fragment.ListTaskFragment;
+import com.example.taskmanager.veiwmodel.LoginViewModel;
 import com.example.taskmanager.view.fragment.LoginFragment;
 
-public class LoginActivity extends AppCompatActivity implements Login.ICallBacks {
+public class LoginActivity extends AppCompatActivity implements LoginViewModel.ICallBacks {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,7 +5,7 @@
 <data>
 <variable
     name="loginViewModel"
-    type="com.example.taskmanager.veiwmodel.Login" />
+    type="com.example.taskmanager.veiwmodel.LoginViewModel" />
 </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
