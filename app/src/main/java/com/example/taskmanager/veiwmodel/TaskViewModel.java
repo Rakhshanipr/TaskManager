@@ -1,24 +1,22 @@
 package com.example.taskmanager.veiwmodel;
 
 import com.example.taskmanager.services.model.Task;
+import com.example.taskmanager.services.repository.TaskRepository;
 
 public class TaskViewModel {
-    Task mTask;
 
-    public String getTitle(){
-        return mTask.getTitle();
+    //region defind variable
+    TaskRepository mTaskRepository;
+
+    //endregion
+
+
+    public TaskViewModel() {
+        mTaskRepository=TaskRepository.getInstance();
     }
 
-    public String getDescribe(){
-        return mTask.getDescribe();
-    }
-
-    public String getState(){
-        return mTask.getState().toString();
-    }
-
-    public String getDate(){
-        return mTask.getDate().toString();
+    public void addTask(Task task){
+        mTaskRepository.add(task);
     }
 
 }

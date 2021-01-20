@@ -18,6 +18,7 @@
             android:layout_marginTop="160dp"
             android:ems="10"
             android:foregroundGravity="center_vertical|center|center_horizontal"
+            android:hint="please enter your user name"
             android:inputType="textPersonName"
             android:text="ali"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,9 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:text="123"
             android:foregroundGravity="center_vertical|center|center_horizontal"
+            android:hint="enter your password"
             android:inputType="textPersonName"
+            android:text="123"
             app:layout_constraintEnd_toEndOf="@+id/editText_userName"
             app:layout_constraintStart_toStartOf="@+id/editText_userName"
             app:layout_constraintTop_toBottomOf="@+id/editText_userName" />
@@ -41,24 +43,28 @@
             android:id="@+id/button_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
+            android:backgroundTint="#71B536"
             android:text="Login"
+            android:textAllCaps="false"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/editText_password"
-            app:layout_constraintHorizontal_bias="0.418"
-            app:layout_constraintStart_toStartOf="@+id/editText_password"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_password"
             app:layout_constraintVertical_bias="0.015" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="@+id/button_login"
-            app:layout_constraintStart_toStartOf="@+id/button_login"
-            app:layout_constraintTop_toBottomOf="@+id/button_login" />
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#71B536"
+            android:text="User"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button_login" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

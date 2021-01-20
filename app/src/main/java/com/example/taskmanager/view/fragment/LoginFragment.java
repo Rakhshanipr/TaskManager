@@ -14,7 +14,9 @@ import com.example.taskmanager.databinding.FragmentLoginBinding;
 import com.example.taskmanager.veiwmodel.LoginViewModel;
 
 public class LoginFragment extends Fragment {
-
+    //region static method and variable
+    public static final String TAG_USER_FRAGMENT = "com.example.taskmanager.view.fragment.tag_user_fragment";
+    //endregion
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
@@ -29,15 +31,15 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_login, container, false);
-        mFragmentLoginBinding= DataBindingUtil.inflate(inflater,
-                R.layout.fragment_login,container,false);
+        mFragmentLoginBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_login, container, false);
         setListners();
-        mLoginViewModelViewModel =new LoginViewModel();
+        mLoginViewModelViewModel = new LoginViewModel();
         return mFragmentLoginBinding.getRoot();
     }
 
@@ -45,19 +47,16 @@ public class LoginFragment extends Fragment {
         mFragmentLoginBinding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* if (mLoginViewModel.isValid(mFragmentLoginBinding.editTextUserName.getText().toString()
-                        ,mFragmentLoginBinding.editTextPassword.getText().toString())){
-                    getFragmentManager()
-                            .beginTransaction()
-                            .add(R.id.container_login, LoginFragment.newInstance())
-                            .commit();
-                }*/
-
-                mLoginViewModelViewModel.LoginClicked(getActivity(),
+                mLoginViewModelViewModel.LoginButtonClicked(getActivity(),
                         mFragmentLoginBinding.editTextUserName.getText().toString()
-                        ,mFragmentLoginBinding.editTextPassword.getText().toString());
+                        , mFragmentLoginBinding.editTextPassword.getText().toString());
+            }
+        });
 
-
+        mFragmentLoginBinding.buttonUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoginViewModelViewModel.UserButtonClicked(getFragmentManager(), TAG_USER_FRAGMENT);
             }
         });
     }

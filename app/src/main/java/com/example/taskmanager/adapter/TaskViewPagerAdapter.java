@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.taskmanager.services.model.State;
 import com.example.taskmanager.view.fragment.ListTaskFragment;
 
 public class TaskViewPagerAdapter extends FragmentStateAdapter {

@@ -2,7 +2,6 @@ package com.example.taskmanager.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskmanager.R;
 import com.example.taskmanager.databinding.ListItemTaskBinding;
 import com.example.taskmanager.services.model.Task;
+import com.example.taskmanager.veiwmodel.ListRecyclerViewTaskViewModel;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
-public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.taskHolder> {
+public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.TaskHolder> {
 
     //region defind variable
     List<Task> mTaskList;
-    ListItemTaskBinding mListItemTaskBinding;
     Context mContext;
     //endregion
 
@@ -32,21 +30,21 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
     @NonNull
     @Override
-    public taskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= LayoutInflater.from(mContext);
 
-        mListItemTaskBinding= DataBindingUtil.inflate(
+        ListItemTaskBinding mListItemTaskBinding= DataBindingUtil.inflate(
                 inflater
                 ,R.layout.list_item_task
                 ,parent
                 ,false
         );
-        return null;
+        return new TaskHolder(mListItemTaskBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull taskHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
+        holder.bindTask(mTaskList.get(position));
     }
 
     @Override
@@ -57,12 +55,24 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
 
 
-    class taskHolder extends RecyclerView.ViewHolder{
+    class TaskHolder extends RecyclerView.ViewHolder{
 
-        public taskHolder(@NonNull View itemView) {
-            super(itemView);
+        ListItemTaskBinding mListItemTaskBinding;
+        Task mTask;
+
+        public TaskHolder(ListItemTaskBinding listItemTaskBinding) {
+            super(listItemTaskBinding.getRoot());
+            mListItemTaskBinding=listItemTaskBinding;
+
+            listItemTaskBinding.setListRecyclerViewTaskViewModel(new ListRecyclerViewTaskViewModel(mTask));
         }
 
+        void bindTask(Task task){
+            mTask=task;
+            mListItemTaskBinding.getListRecyclerViewTaskViewModel().setTask(task);
+//            mSoundBinding.executePendingBindings();
+
+        }
     }
 
 

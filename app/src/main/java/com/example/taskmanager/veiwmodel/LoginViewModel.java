@@ -2,6 +2,7 @@ package com.example.taskmanager.veiwmodel;
 
 import android.app.Activity;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.taskmanager.databinding.FragmentLoginBinding;
@@ -10,6 +11,7 @@ import com.example.taskmanager.services.model.Task;
 import com.example.taskmanager.services.model.User;
 import com.example.taskmanager.services.repository.TaskRepository;
 import com.example.taskmanager.services.repository.UserRepository;
+import com.example.taskmanager.view.fragment.UserFragment;
 
 import java.util.Date;
 
@@ -28,8 +30,9 @@ public class LoginViewModel {
         mUserRepository = UserRepository.getInstance();
         mTaskRepository=TaskRepository.getInstance();
         //region defind func to test
-        mUserRepository.add(new User("ali", "123", 1));
-
+        User user=new User("ali", "123", 1);
+        mUserRepository.add(user);
+        UserRepository.setsOnlineUser(user);
         mTaskRepository.add(new Task("university"
                 ,"complete exame math"
                 , State.Done, new Date()
@@ -41,17 +44,36 @@ public class LoginViewModel {
                 ,UserRepository.getsOnlineUser().getId()));
 
 
+        mTaskRepository.add(new Task("faghihi"
+                ,"go to home's"
+                , State.Doing, new Date()
+                ,UserRepository.getsOnlineUser().getId()));
+
+
         mTaskRepository.add(new Task("taheri"
                 ,"book sire piambar"
                 , State.ToDo, new Date()
                 ,UserRepository.getsOnlineUser().getId()));
 
+        mTaskRepository.add(new Task("Haji"
+                ,"asked question"
+                , State.ToDo, new Date()
+                ,UserRepository.getsOnlineUser().getId()));
 
+        mTaskRepository.add(new Task("AmirHossen"
+                ,"learn math for amir"
+                , State.ToDo, new Date()
+                ,UserRepository.getsOnlineUser().getId()));
+
+        mTaskRepository.add(new Task("Neda"
+                ,"Complete mobile network"
+                , State.ToDo, new Date()
+                ,UserRepository.getsOnlineUser().getId()));
         //endregion
     }
 
 
-    public void LoginClicked(Activity activity, String userName, String password) {
+    public void LoginButtonClicked(Activity activity, String userName, String password) {
         if (mUserRepository.isValid(userName, password)) {
 
             mUserRepository.setsOnlineUser(mUserRepository.retValidUser(userName, password));
@@ -66,6 +88,10 @@ public class LoginViewModel {
         }
     }
 
+    public void UserButtonClicked(FragmentManager fragmentManager,String tag){
+        UserFragment userFragment=UserFragment.newInstance();
+        userFragment.show(fragmentManager,tag);
+    }
 
     public interface ICallBacks {
         void Logined(User user);

@@ -2,6 +2,7 @@ package com.example.taskmanager.services.repository;
 
 import com.example.taskmanager.services.model.State;
 import com.example.taskmanager.services.model.Task;
+import com.example.taskmanager.services.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +46,24 @@ public class TaskRepository {
         sTaskList.remove(task);
     }
 
-    public void delete(UUID uuid) {
+    public void delete(UUID uuid,User user) {
         for (int i = 0; i < sTaskList.size(); i++) {
-            if (sTaskList.get(i).getId() == uuid) {
+            if (sTaskList.get(i).getId() == uuid&&sTaskList.get(i).getUser()==user.getId()) {
                 sTaskList.remove(i);
                 return;
             }
         }
     }
 
+
+    public Task get(UUID uuid, User user) {
+        for (int i = 0; i < sTaskList.size(); i++) {
+            if (sTaskList.get(i).getId() == uuid && sTaskList.get(i).getUser() == user.getId()) {
+                return sTaskList.get(i);
+            }
+        }
+        return null;
+    }
 
     public Task get(UUID uuid) {
         for (int i = 0; i < sTaskList.size(); i++) {
@@ -63,7 +73,6 @@ public class TaskRepository {
         }
         return null;
     }
-
 
     public List<Task> getList() {
         return sTaskList;
@@ -79,14 +88,24 @@ public class TaskRepository {
         return list;
     }
 
-    public void deletWithState(State state) {
-        boolean reapit=true;
+    public List<Task> getList(State state, User user) {
+        List<Task> list = new ArrayList<>();
+        for (int i = 0; i < sTaskList.size(); i++) {
+            if (sTaskList.get(i).getState().equals(state) && sTaskList.get(i).getUser() == UserRepository.getsOnlineUser().getId() && sTaskList.get(i).getUser() == user.getId()) {
+                list.add(sTaskList.get(i));
+            }
+        }
+        return list;
+    }
+
+    public void deletWithState(State state, User user) {
+        boolean reapit = true;
         while (reapit) {
-            reapit=false;
+            reapit = false;
             for (int i = 0; i < sTaskList.size(); i++) {
-                if (sTaskList.get(i).getState().equals(state) && sTaskList.get(i).getUser() == UserRepository.getsOnlineUser().getId()) {
+                if (sTaskList.get(i).getState().equals(state) && sTaskList.get(i).getUser() == UserRepository.getsOnlineUser().getId() && sTaskList.get(i).getUser() == user.getId()) {
                     sTaskList.remove(i);
-                    reapit=true;
+                    reapit = true;
                     break;
                 }
             }

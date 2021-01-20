@@ -6,84 +6,99 @@
     >
 
     <data>
-
+        <variable
+            name="ListRecyclerViewTaskViewModel"
+            type="com.example.taskmanager.veiwmodel.ListRecyclerViewTaskViewModel" />
     </data>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#E3A3A3"
-    android:backgroundTint="#A797C8">
-
-    <TextView
-        android:id="@+id/textView_describe"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Describe"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView_title"
-        app:layout_constraintStart_toStartOf="@+id/textView_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView_title" />
-
-    <TextView
-        android:id="@+id/textView_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Title"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Date"
-        android:textColor="#000000"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView_title" />
-
-    <TextView
-        android:id="@+id/textView_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="State"
-        android:textColor="#000000"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_describe"
-        app:layout_constraintEnd_toEndOf="@+id/textView_date"
-        app:layout_constraintTop_toTopOf="@+id/textView_describe" />
-
-    <ImageButton
-        android:id="@+id/imageButton_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_describe"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        android:background="#E3A3A3"
+        android:backgroundTint="#A797C8">
 
-    <ImageButton
-        android:id="@+id/imageButton_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton_delete"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton_delete"
-        app:layout_constraintTop_toTopOf="@+id/imageButton_delete"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        <TextView
+            android:id="@+id/textView_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#56A67F"
+            android:text="@{ListRecyclerViewTaskViewModel.Describe}"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textView_title"
+            app:layout_constraintTop_toBottomOf="@+id/textView_title"
+            tools:text="Describe" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@{ListRecyclerViewTaskViewModel.Title}"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/textView_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#1E1C1C"
+            android:text="@{ListRecyclerViewTaskViewModel.Date}"
+            android:textColor="#FDF4F4"
+            android:textSize="19sp"
+            app:layout_constraintStart_toStartOf="@+id/textView_describe"
+            app:layout_constraintTop_toBottomOf="@+id/textView_describe"
+            tools:text="Date" />
+
+        <TextView
+            android:id="@+id/textView_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="#EF4747"
+            android:text="@{ListRecyclerViewTaskViewModel.state}"
+            android:textColor="#000000"
+            android:textSize="19sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_title"
+            tools:text="State" />
+
+        <ImageButton
+            android:id="@+id/imageButton_delete"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#A797C8"
+            android:foreground="@android:drawable/ic_menu_delete"
+            android:onClick="@{()-> ListRecyclerViewTaskViewModel.deleteTask()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_date"
+            app:srcCompat="@android:drawable/divider_horizontal_dim_dark"
+            tools:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
+        <ImageButton
+            android:id="@+id/imageButton_edit"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="8dp"
+            android:background="#A797C8"
+            android:foreground="@android:drawable/ic_menu_edit"
+            android:onClick="@{()-> ListRecyclerViewTaskViewModel.editTask()}"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton_delete"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton_delete"
+            app:layout_constraintTop_toTopOf="@+id/imageButton_delete" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
