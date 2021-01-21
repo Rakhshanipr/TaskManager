@@ -22,7 +22,6 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     Context mContext;
     //endregion
 
-
     public TaskRecyclerViewAdapter(Context context, List<Task> taskList) {
         mTaskList = taskList;
         mContext=context.getApplicationContext();
