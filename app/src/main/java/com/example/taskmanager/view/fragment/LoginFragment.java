@@ -56,7 +56,8 @@ public class LoginFragment extends Fragment {
         mFragmentLoginBinding.buttonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLoginViewModelViewModel.UserButtonClicked(getFragmentManager(), TAG_USER_FRAGMENT);
+                UserFragment userFragment=UserFragment.newInstance();
+                userFragment.show(getFragmentManager(),TAG_USER_FRAGMENT);
             }
         });
     }

@@ -16,6 +16,10 @@ public class Task {
 
     private UUID mUser;
 
+    public Task() {
+        mId=UUID.randomUUID();
+    }
+
     public Task(String title, String describe, State state, Date date, UUID user) {
         mTitle = title;
         mDescribe = describe;

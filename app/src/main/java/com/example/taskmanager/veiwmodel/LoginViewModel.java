@@ -88,10 +88,6 @@ public class LoginViewModel {
         }
     }
 
-    public void UserButtonClicked(FragmentManager fragmentManager,String tag){
-        UserFragment userFragment=UserFragment.newInstance();
-        userFragment.show(fragmentManager,tag);
-    }
 
     public interface ICallBacks {
         void Logined(User user);

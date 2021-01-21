@@ -12,7 +12,9 @@
             android:id="@+id/datePicker_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -20,11 +22,11 @@
         </DatePicker>
 
         <Button
-            android:id="@+id/button_fragmentDatePicker_cancel"
+            android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:background="#66BD6A"
             android:backgroundTint="#86CDD5"
             android:text="Cancel"
@@ -45,6 +47,6 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/datePicker_date"
-            app:layout_constraintTop_toTopOf="@+id/button_fragmentDatePicker_cancel" />
+            app:layout_constraintTop_toTopOf="@+id/button_cancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
