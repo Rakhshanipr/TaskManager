@@ -12,9 +12,11 @@ import android.view.View;
 
 import com.example.taskmanager.databinding.ActivityViewPagerBinding;
 import com.example.taskmanager.veiwmodel.MainViewModel;
+import com.example.taskmanager.veiwmodel.TaskViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class ViewPagerActivity extends AppCompatActivity {
+public class ViewPagerActivity extends AppCompatActivity
+        implements TaskViewModel.ICallBacksTaskViewModel {
     //region defind static method and variable
     public static Intent newIntent(Context source) {
         Intent intent = new Intent(source, ViewPagerActivity.class);
@@ -50,5 +52,8 @@ public class ViewPagerActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void startSahreActivity(Intent intet) {
+        startActivity(intet);
+    }
 }

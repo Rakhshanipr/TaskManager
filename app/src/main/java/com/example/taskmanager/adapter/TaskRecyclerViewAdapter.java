@@ -1,6 +1,7 @@
 package com.example.taskmanager.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         void bindTask(Task task){
             mTask=task;
             mListItemTaskBinding.getListRecyclerViewTaskViewModel().setTask(task);
-            mListItemTaskBinding.constraintlayoutMain.setOnClickListener(new View.OnClickListener() {
+            mListItemTaskBinding.imageButtonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -90,6 +91,27 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
                     editTaskFragment.show(mFragmentManager, TAG_SHOW_EDIT_TASK_FRAGMENT);
 
+                }
+            });
+
+            mListItemTaskBinding.imageButtonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mTaskViewModel.deleteTask(task);
+                    ((ListTaskFragment)mTargetFragment).updateAdapter();
+                }
+            });
+
+            mListItemTaskBinding.imageButtonShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT,task.getDescribe()+"---"+task.getState());
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, task.getTitle());
+                    sendIntent.setType("text/plain");
+
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
+                    mTaskViewModel.
                 }
             });
 

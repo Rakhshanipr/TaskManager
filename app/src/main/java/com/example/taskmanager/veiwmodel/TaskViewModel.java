@@ -1,6 +1,7 @@
 package com.example.taskmanager.veiwmodel;
 
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +10,7 @@ import com.example.taskmanager.R;
 import com.example.taskmanager.adapter.TaskRecyclerViewAdapter;
 import com.example.taskmanager.services.model.State;
 import com.example.taskmanager.services.model.Task;
+import com.example.taskmanager.services.model.User;
 import com.example.taskmanager.services.repository.TaskRepository;
 import com.example.taskmanager.services.repository.UserRepository;
 import com.example.taskmanager.view.fragment.EditTaskFragment;
@@ -20,7 +22,7 @@ public class TaskViewModel {
 
     //region defind variable
     TaskRepository mTaskRepository;
-
+    ICallBacksTaskViewModel mCallBacks;
     static FragmentManager mFragmentManager;
     //endregion
 
@@ -54,7 +56,15 @@ public class TaskViewModel {
         mTaskRepository.update(task);
     }
 
-    public void showEditTaskFragment(UUID uuid){
+    public void deleteTask(Task task){
+        mTaskRepository.delete(task);
+    }
 
+    public void startShareActivity(Intent intent){
+        mCallBacks.startSahreActivity(intent);
+    }
+
+    public interface ICallBacksTaskViewModel {
+        void startSahreActivity(Intent intet);
     }
 }
