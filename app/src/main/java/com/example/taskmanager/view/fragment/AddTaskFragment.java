@@ -34,7 +34,7 @@ public class AddTaskFragment extends DialogFragment {
     public static final int REQUEST_CODE_TIME_PICKER_FRAGMENT = 1;
 
     public static final String TAG_SET_DATE_FRAGMENT = "com.example.taskmanager.view.fragment.show_DatePickerFragment";
-    public static final String TAG_SET_Time_FRAGMENT = "com.example.taskmanager.view.fragment.show_DateTimeFragment";
+    public static final String TAG_SET_TIME_FRAGMENT = "com.example.taskmanager.view.fragment.show_DateTimeFragment";
 
 
     public static AddTaskFragment newInstance() {
@@ -89,7 +89,7 @@ public class AddTaskFragment extends DialogFragment {
             public void onClick(View v) {
                 TimePickerFragment timePickerFragment=TimePickerFragment.newInstance();
                 timePickerFragment.setTargetFragment(AddTaskFragment.this, REQUEST_CODE_TIME_PICKER_FRAGMENT);
-                timePickerFragment.show(getFragmentManager(), TAG_SET_DATE_FRAGMENT);
+                timePickerFragment.show(getFragmentManager(), TAG_SET_TIME_FRAGMENT);
             }
         });
 

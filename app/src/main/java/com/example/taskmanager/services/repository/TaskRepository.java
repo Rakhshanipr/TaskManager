@@ -72,7 +72,7 @@ public class TaskRepository {
 
     public Task get(UUID uuid) {
         for (int i = 0; i < sTaskList.size(); i++) {
-            if (sTaskList.get(i).getId() == uuid) {
+            if (sTaskList.get(i).getId().equals(uuid)) {
                 return sTaskList.get(i);
             }
         }

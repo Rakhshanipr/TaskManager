@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -167,13 +167,13 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="202dp"
-            android:layout_height="164dp"
+            android:layout_width="216dp"
+            android:layout_height="179dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add_task_512" />
+            app:srcCompat="@drawable/_249008" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
