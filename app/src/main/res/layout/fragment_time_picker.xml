@@ -13,6 +13,12 @@
             android:id="@+id/timePicker_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:amPmBackgroundColor="#858181"
+            android:amPmTextColor="#858181"
+            android:background="#858181"
+            android:backgroundTint="#858181"
+            android:foregroundTint="#858181"
+            android:headerBackground="@color/cardview_dark_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

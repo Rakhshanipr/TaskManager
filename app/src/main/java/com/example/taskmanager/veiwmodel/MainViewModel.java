@@ -7,18 +7,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.taskmanager.adapter.TaskRecyclerViewAdapter;
 import com.example.taskmanager.adapter.TaskViewPagerAdapter;
+import com.example.taskmanager.services.model.State;
 import com.example.taskmanager.services.model.Task;
+import com.example.taskmanager.services.repository.TaskRepository;
+import com.example.taskmanager.services.repository.UserRepository;
 
 import java.util.List;
 
 public class MainViewModel {
+
+    TaskRepository mTaskRepository;
 
     public static TaskViewPagerAdapter createTaskViewPagerAdapter(Activity activity){
         TaskViewPagerAdapter taskViewPagerAdapter=new TaskViewPagerAdapter((AppCompatActivity)activity);
         return taskViewPagerAdapter;
     }
 
-    public static TaskRecyclerViewAdapter createTaskRecyclerViewAdapter(Context context, List<Task> list){
-        return new TaskRecyclerViewAdapter(context,list);
+    public MainViewModel() {
+        mTaskRepository=TaskRepository.getInstance();
     }
+
 }

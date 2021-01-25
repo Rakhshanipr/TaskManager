@@ -24,6 +24,7 @@ import com.example.taskmanager.veiwmodel.TaskViewModel;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class AddTaskFragment extends DialogFragment {
@@ -50,12 +51,9 @@ public class AddTaskFragment extends DialogFragment {
     Calendar mCalender;
     //endregion
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -69,7 +67,6 @@ public class AddTaskFragment extends DialogFragment {
         initial();
         
         setListenrs();
-        
 
         return mFragmentAddTaskBinding.getRoot();
 
@@ -114,6 +111,9 @@ public class AddTaskFragment extends DialogFragment {
                 task.setUser(UserRepository.getsOnlineUser().getId());
                 task.setState(state);
                 mTaskViewModel.addTask(task);
+
+                ListTaskFragment listTaskFragment=(ListTaskFragment) getTargetFragment();
+                listTaskFragment.onActivityResult(ListTaskFragment.REQUEST_CODE_SHOW_ADD_TASK_FRAGMENT,Activity.RESULT_OK,null);
                 //endregion
                 getDialog().dismiss();
             }

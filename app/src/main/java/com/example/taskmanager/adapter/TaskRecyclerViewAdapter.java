@@ -51,9 +51,6 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         return mTaskList.size();
     }
 
-
-
-
     class TaskHolder extends RecyclerView.ViewHolder{
 
         ListItemTaskBinding mListItemTaskBinding;

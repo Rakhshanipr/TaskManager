@@ -39,7 +39,7 @@ public class ListRecyclerViewTaskViewModel {
 
         int n = calendar.get(Calendar.MONTH);
         String date = calendar.get(Calendar.YEAR) + " / " + calendar.get(Calendar.DAY_OF_MONTH) + " / " + calendar.get(Calendar.MONTH)
-                + "     " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + " " + ((calendar.get(Calendar.AM_PM) == 1) ? "AM" : "PM");
+                + "     " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + " " + ((calendar.get(Calendar.AM_PM) == 0) ? "AM" : "PM");
         ;
 
 
@@ -53,5 +53,10 @@ public class ListRecyclerViewTaskViewModel {
     public void editTask() {
 
     }
+
+    public void share() {
+
+    }
+
 
 }

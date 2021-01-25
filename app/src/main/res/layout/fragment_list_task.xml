@@ -12,7 +12,7 @@
         android:id="@+id/recyclerview_list_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D38B8B" />
+        android:background="#B7ADD1" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_add"
@@ -20,21 +20,21 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="#E64A19"
+        android:backgroundTint="#A8C8AA"
         android:clickable="true"
         app:fabCustomSize="45dp"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="#9A6868"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/add_task_512" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#04534A"
+        android:backgroundTint="#4DF4E1"
         android:clickable="true"
         app:fabCustomSize="45dp"
         app:fabSize="mini"
@@ -48,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#C5765D"
         android:clickable="true"
         app:fabCustomSize="45dp"
         app:fabSize="mini"
