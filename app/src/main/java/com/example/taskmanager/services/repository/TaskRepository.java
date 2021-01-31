@@ -11,6 +11,7 @@ import com.example.taskmanager.services.model.Task;
 import com.example.taskmanager.services.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -70,6 +71,8 @@ public class TaskRepository {
         return null;
     }
 
+
+
     public Task get(UUID uuid) {
         for (int i = 0; i < sTaskList.size(); i++) {
             if (sTaskList.get(i).getId().equals(uuid)) {
@@ -94,6 +97,8 @@ public class TaskRepository {
         return list;
     }
 
+
+
     public List<Task> getList(State state, User user) {
         List<Task> list = new ArrayList<>();
         for (int i = 0; i < sTaskList.size(); i++) {
@@ -102,6 +107,34 @@ public class TaskRepository {
             }
         }
         return list;
+    }
+
+
+
+    public List<Task> getList(User user) {
+        List<Task> list = new ArrayList<>();
+        for (int i = 0; i < sTaskList.size(); i++) {
+            if (sTaskList.get(i).getUser() == user.getId()) {
+                list.add(sTaskList.get(i));
+            }
+        }
+        return list;
+    }
+
+    public List<Task> getList(User user, java.util.Date dateFrom, Date dateTo
+            , String title, String describe) {
+
+        List<Task> taskListResult=new ArrayList<>();
+
+        for (Task task:
+                sTaskList) {
+            if (task.getDate().compareTo(dateFrom)>=0 && task.getDate().compareTo(dateTo)<=0
+                    && task.getTitle().contains(title) && task.getDescribe().contains(describe)
+            ){
+                taskListResult.add(task);
+            }
+        }
+        return sTaskList;
     }
 
     public void deletWithState(State state, User user) {

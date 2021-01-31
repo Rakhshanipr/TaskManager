@@ -77,8 +77,8 @@ public class DatePickerFragment extends DialogFragment {
                         , mFragmentDatePickerBinding.datePickerDate.getDayOfMonth());
 
                 Fragment fragment = getTargetFragment();
-                fragment.onActivityResult(AddTaskFragment.REQUEST_CODE_DATE_PICKER_FRAGMENT
-                        , Activity.RESULT_OK, intent);
+
+                fragment.onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
                 getDialog().dismiss();
             }
         });

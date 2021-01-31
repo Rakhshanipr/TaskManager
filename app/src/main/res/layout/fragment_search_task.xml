@@ -14,10 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
+            android:background="#CB87E8"
             android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@+id/container_list"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout_listTaskSearch"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_weight="4">
+            app:layout_constraintVertical_weight="3"
+            tools:layout_editor_absoluteX="50dp">
 
             <EditText
                 android:id="@+id/editTextText_title"
@@ -44,36 +46,43 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextText_title" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_from_setDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="114dp" />
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:text="Date"
+                app:layout_constraintStart_toStartOf="@+id/editTextText_description"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText_description" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_from_setTime"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                tools:layout_editor_absoluteX="249dp"
-                tools:layout_editor_absoluteY="114dp" />
+                android:layout_height="50dp"
+                android:layout_marginStart="48dp"
+                android:text="Time"
+                app:layout_constraintStart_toEndOf="@+id/button_from_setDate"
+                app:layout_constraintTop_toTopOf="@+id/button_from_setDate" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button_to_setDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="192dp" />
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:text="Date"
+                app:layout_constraintEnd_toEndOf="@+id/button_from_setDate"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/button_from_setDate"
+                app:layout_constraintTop_toBottomOf="@+id/button_from_setDate" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button_to_setTime"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                tools:layout_editor_absoluteX="249dp"
-                tools:layout_editor_absoluteY="192dp" />
+                android:layout_height="50dp"
+                android:text="Time"
+                app:layout_constraintEnd_toEndOf="@+id/button_from_setTime"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/button_from_setTime"
+                app:layout_constraintTop_toTopOf="@+id/button_to_setDate" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -93,15 +102,64 @@
                 app:layout_constraintBottom_toBottomOf="@+id/editTextText_description"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/editTextText_description" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From :"
+                app:layout_constraintBottom_toBottomOf="@+id/button_from_setDate"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toTopOf="@+id/button_from_setDate" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To :"
+                app:layout_constraintBottom_toBottomOf="@+id/button_to_setDate"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/button_to_setDate" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:src="@android:drawable/ic_search_category_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button_to_setTime" />
+
+            <ImageButton
+                android:id="@+id/imageButton_exit"
+                android:layout_width="60dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="#CB87E8"
+                android:src="@android:drawable/ic_popup_sync"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_list"
+        <FrameLayout
+            android:id="@+id/frameLayout_listTaskSearch"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="#3FAEEA"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_search"
-            app:layout_constraintVertical_weight="6"
-            tools:layout_editor_absoluteX="0dp"/>
+            app:layout_constraintVertical_weight="6" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylerView_list_task_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

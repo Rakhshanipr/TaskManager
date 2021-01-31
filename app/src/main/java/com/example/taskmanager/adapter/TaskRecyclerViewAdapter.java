@@ -1,5 +1,6 @@
 package com.example.taskmanager.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,32 +25,35 @@ import java.util.List;
 
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.TaskHolder> {
 
-    public static final String TAG_SHOW_EDIT_TASK_FRAGMENT = "com.example.taskmanager.veiwmodel.show_edit_task_fragment";
 
     //region defind variable
     List<Task> mTaskList;
-    Context mContext;
+    Activity mActivity;
     Fragment mTargetFragment;
     FragmentManager mFragmentManager;
     //endregion
 
-    public TaskRecyclerViewAdapter(Context context, List<Task> taskList,Fragment targetFragment,FragmentManager fragmentManager) {
+    public TaskRecyclerViewAdapter(Activity activity, List<Task> taskList, Fragment targetFragment, FragmentManager fragmentManager) {
         mTaskList = taskList;
-        mContext=context.getApplicationContext();
-        mTargetFragment=targetFragment;
-        mFragmentManager=fragmentManager;
+        mActivity = activity;
+        mTargetFragment = targetFragment;
+        mFragmentManager = fragmentManager;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        mTaskList = taskList;
     }
 
     @NonNull
     @Override
     public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater= LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mActivity);
 
-        ListItemTaskBinding mListItemTaskBinding= DataBindingUtil.inflate(
+        ListItemTaskBinding mListItemTaskBinding = DataBindingUtil.inflate(
                 inflater
-                ,R.layout.list_item_task
-                ,parent
-                ,false
+                , R.layout.list_item_task
+                , parent
+                , false
         );
         return new TaskHolder(mListItemTaskBinding);
     }
@@ -64,59 +68,24 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         return mTaskList.size();
     }
 
-    class TaskHolder extends RecyclerView.ViewHolder{
+    class TaskHolder extends RecyclerView.ViewHolder {
 
         ListItemTaskBinding mListItemTaskBinding;
         Task mTask;
-        TaskViewModel mTaskViewModel;
 
         public TaskHolder(ListItemTaskBinding listItemTaskBinding) {
             super(listItemTaskBinding.getRoot());
-            mListItemTaskBinding=listItemTaskBinding;
-            mTaskViewModel=new TaskViewModel();
-            listItemTaskBinding.setListRecyclerViewTaskViewModel(new ListRecyclerViewTaskViewModel(mTask));
+            mListItemTaskBinding = listItemTaskBinding;
+            listItemTaskBinding.setListRecyclerViewTaskViewModel(
+                    new ListRecyclerViewTaskViewModel(mTask
+                            , mTargetFragment
+                            , mFragmentManager
+                            , mActivity));
         }
 
-        void bindTask(Task task){
-            mTask=task;
+        void bindTask(Task task) {
+            mTask = task;
             mListItemTaskBinding.getListRecyclerViewTaskViewModel().setTask(task);
-            mListItemTaskBinding.imageButtonEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    EditTaskFragment editTaskFragment=EditTaskFragment.newInstance(task.getId());
-
-                    editTaskFragment.setTargetFragment(mTargetFragment
-                            , ListTaskFragment.REQUEST_CODE_SHOW_EDIT_TASK_FRAGMENT);
-
-                    editTaskFragment.show(mFragmentManager, TAG_SHOW_EDIT_TASK_FRAGMENT);
-
-                }
-            });
-
-            mListItemTaskBinding.imageButtonDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mTaskViewModel.deleteTask(task);
-                    ((ListTaskFragment)mTargetFragment).updateAdapter();
-                }
-            });
-
-            mListItemTaskBinding.imageButtonShare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT,task.getDescribe()+"---"+task.getState());
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, task.getTitle());
-                    sendIntent.setType("text/plain");
-
-                    Intent shareIntent = Intent.createChooser(sendIntent, null);
-                    mTaskViewModel.
-                }
-            });
-
         }
     }
-
-
 }

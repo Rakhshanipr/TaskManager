@@ -1,16 +1,48 @@
 package com.example.taskmanager.veiwmodel;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.taskmanager.services.model.Task;
 import com.example.taskmanager.services.repository.TaskRepository;
+import com.example.taskmanager.view.fragment.EditTaskFragment;
+import com.example.taskmanager.view.fragment.ListTaskFragment;
 
 import java.util.Calendar;
 
 public class ListRecyclerViewTaskViewModel {
 
+    //region static methode and variable
+    public static final String TAG_SHOW_EDIT_TASK_FRAGMENT = "com.example.taskmanager.veiwmodel.show_edit_task_fragment";
+    //endregion\
+
+    //region defind variable
+
     Task mTask;
 
-    public ListRecyclerViewTaskViewModel(Task task) {
+    Activity mActivity;
+
+    ICallBacksRecyclerViewAdapter mICallBacksRecyclerViewAdapter;
+
+    Fragment mTargetFragment;
+    FragmentManager mFragmentManager;
+
+    TaskViewModel mTaskViewModel;
+    MainViewModel mMainViewModel;
+//endregion
+
+
+    public ListRecyclerViewTaskViewModel(Task task, Fragment targetFragment, FragmentManager fragmentManager, Activity activity) {
         mTask = task;
+        mTargetFragment = targetFragment;
+        mFragmentManager = fragmentManager;
+        mTaskViewModel = new TaskViewModel();
+        mActivity=activity;
+        mMainViewModel = new MainViewModel(activity.getApplicationContext());
     }
 
     public Task getTask() {
@@ -47,16 +79,35 @@ public class ListRecyclerViewTaskViewModel {
     }
 
     public void deleteTask() {
-
+        mTaskViewModel.deleteTask(mTask);
+        if (mTargetFragment instanceof ICallBacksRecyclerViewAdapter) {
+            mICallBacksRecyclerViewAdapter = (ICallBacksRecyclerViewAdapter) mTargetFragment;
+            mICallBacksRecyclerViewAdapter.updateRecyclerView();
+        }
     }
 
     public void editTask() {
+        EditTaskFragment editTaskFragment = EditTaskFragment.newInstance(mTask.getId());
+
+        editTaskFragment.setTargetFragment(mTargetFragment
+                , ListTaskFragment.REQUEST_CODE_SHOW_EDIT_TASK_FRAGMENT);
+
+        editTaskFragment.show(mFragmentManager, TAG_SHOW_EDIT_TASK_FRAGMENT);
 
     }
 
     public void share() {
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, mTask.getDescribe() + "---" + mTask.getState());
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, mTask.getTitle());
+        sendIntent.setType("text/plain");
 
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        mMainViewModel.startShareActivity(shareIntent,mActivity);
     }
 
+    public interface ICallBacksRecyclerViewAdapter {
+        void updateRecyclerView();
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.taskmanager.veiwmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -16,13 +17,17 @@ import com.example.taskmanager.services.repository.UserRepository;
 import com.example.taskmanager.view.fragment.EditTaskFragment;
 import com.example.taskmanager.view.fragment.ListTaskFragment;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class TaskViewModel {
 
     //region defind variable
     TaskRepository mTaskRepository;
-    ICallBacksTaskViewModel mCallBacks;
+
     static FragmentManager mFragmentManager;
     //endregion
 
@@ -34,16 +39,28 @@ public class TaskViewModel {
         mTaskRepository.add(task);
     }
 
-    public TaskRecyclerViewAdapter createTaskRecyclerViewAdapter(Context context, State state,Fragment target,FragmentManager fragmentManager){
+    public TaskRecyclerViewAdapter createTaskRecyclerViewAdapter(Activity context, State state,Fragment target,FragmentManager fragmentManager){
         return new TaskRecyclerViewAdapter(context,mTaskRepository.getList(state, UserRepository.getsOnlineUser()),target,fragmentManager);
+    }
+
+
+    public TaskRecyclerViewAdapter createTaskRecyclerViewAdapter(Activity activity, Fragment target
+            , FragmentManager fragmentManager, Date dateFrom, Date dateTo
+            , String title, String describe){
+
+
+        List<Task> taskListResult=mTaskRepository.getList(UserRepository.getsOnlineUser()
+        ,dateFrom,dateTo,title,describe);
+
+        return new TaskRecyclerViewAdapter(activity,taskListResult,target,fragmentManager);
     }
 
     public void updateAllRecyclerAdapter(FragmentManager fragmentManager){
         mFragmentManager=fragmentManager;
         for (Fragment fg:fragmentManager.getFragments()
              ) {
-            if (fg instanceof ListTaskFragment){
-                ((ListTaskFragment)fg).updateAdapter();
+            if (fg instanceof ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter){
+                ((ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter)fg).updateRecyclerView();
             }
         }
     }
@@ -60,11 +77,11 @@ public class TaskViewModel {
         mTaskRepository.delete(task);
     }
 
-    public void startShareActivity(Intent intent){
-        mCallBacks.startSahreActivity(intent);
+    public List<Task> getListTask( Date dateFrom, Date dateTo
+            , String title, String describe){
+        return mTaskRepository.getList(UserRepository.getsOnlineUser(),dateFrom,dateTo,title,describe);
     }
 
-    public interface ICallBacksTaskViewModel {
-        void startSahreActivity(Intent intet);
-    }
+
+
 }

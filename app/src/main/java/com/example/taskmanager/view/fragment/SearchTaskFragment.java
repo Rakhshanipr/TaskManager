@@ -1,49 +1,65 @@
 package com.example.taskmanager.view.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.taskmanager.R;
+import com.example.taskmanager.adapter.TaskRecyclerViewAdapter;
+import com.example.taskmanager.databinding.FragmentSearchTaskBinding;
+import com.example.taskmanager.services.model.Task;
+import com.example.taskmanager.services.repository.UserRepository;
+import com.example.taskmanager.veiwmodel.ListRecyclerViewTaskViewModel;
+import com.example.taskmanager.veiwmodel.TaskViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchTaskFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchTaskFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class SearchTaskFragment extends Fragment implements ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter {
 
-    public SearchTaskFragment() {
-        // Required empty public constructor
-    }
+    //region defind static method and variable
+    public static final int REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_FROM = 0;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchTaskFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchTaskFragment newInstance(String param1, String param2) {
+    public static final int REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_TO = 3;
+    public static final int REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_TO = 2;
+
+    public static final int REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_FROM = 1;
+
+    public static final String TAG_SHOW_TIME_PICKER_FRAGMENT_SERACH_FROM = "com.example.taskmanager.view.fragment.searchTaskFragment_showTimePickerSearch_from";
+    public static final String TAG_SHOW_DATE_PICKER_FRAGMENT_SERACH_FROM = "com.example.taskmanager.view.fragment.searchTaskFragment_showDatePickerSearch_from";
+
+    public static final String TAG_SHOW_TIME_PICKER_FRAGMENT_SERACH_TO = "com.example.taskmanager.view.fragment.searchTaskFragment_showTimePickerSearch_to";
+    public static final String TAG_SHOW_DATE_PICKER_FRAGMENT_SERACH_TO = "com.example.taskmanager.view.fragment.searchTaskFragment_showDatePickerSearch_to";
+
+
+    //endregion
+
+    //region defind variable
+    FragmentSearchTaskBinding mFragmentSearchTaskBinding;
+
+    Calendar mCalendarFrom;
+    Calendar mCalendarTo;
+
+    TaskViewModel mTaskViewModel;
+
+    TaskRecyclerViewAdapter mTaskRecyclerViewAdapter;
+
+    //endregion
+
+    public static SearchTaskFragment newInstance() {
         SearchTaskFragment fragment = new SearchTaskFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,16 +67,149 @@ public class SearchTaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_task, container, false);
+
+        mFragmentSearchTaskBinding= DataBindingUtil.inflate(inflater
+                ,R.layout.fragment_search_task
+                ,container
+                ,false);
+
+        setInitial();
+
+        setListners();
+        return mFragmentSearchTaskBinding.getRoot();
+    }
+
+    private void setInitial() {
+        mFragmentSearchTaskBinding.recylerViewListTaskSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        mTaskRecyclerViewAdapter=new TaskRecyclerViewAdapter(getActivity()
+                ,new ArrayList<Task>()
+                ,SearchTaskFragment.this
+                ,getFragmentManager());
+        mFragmentSearchTaskBinding.recylerViewListTaskSearch.setAdapter(mTaskRecyclerViewAdapter);
+    }
+
+    private void setListners() {
+
+        mFragmentSearchTaskBinding.buttonFromSetDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment datePickerFragment=DatePickerFragment.newInstance();
+                datePickerFragment.setTargetFragment(SearchTaskFragment.this
+                        , REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_FROM);
+
+                datePickerFragment.show(getFragmentManager()
+                        , TAG_SHOW_DATE_PICKER_FRAGMENT_SERACH_FROM);
+            }
+        });
+
+        mFragmentSearchTaskBinding.buttonFromSetTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment timePickerFragment=TimePickerFragment.newInstance();
+                timePickerFragment.setTargetFragment(SearchTaskFragment.this
+                        , REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_FROM);
+
+                timePickerFragment.show(getFragmentManager(), TAG_SHOW_TIME_PICKER_FRAGMENT_SERACH_FROM);
+            }
+        });
+
+        mFragmentSearchTaskBinding.buttonToSetDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment datePickerFragment=DatePickerFragment.newInstance();
+                datePickerFragment.setTargetFragment(SearchTaskFragment.this
+                        , REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_TO);
+
+                datePickerFragment.show(getFragmentManager()
+                        , TAG_SHOW_DATE_PICKER_FRAGMENT_SERACH_TO);
+            }
+        });
+
+        mFragmentSearchTaskBinding.buttonToSetTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment timePickerFragment=TimePickerFragment.newInstance();
+                timePickerFragment.setTargetFragment(SearchTaskFragment.this
+                        , REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_TO);
+
+                timePickerFragment.show(getFragmentManager(), TAG_SHOW_TIME_PICKER_FRAGMENT_SERACH_TO);
+
+            }
+        });
+
+        mFragmentSearchTaskBinding.floatingActionButtonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateRecyclerView();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== Activity.RESULT_OK){
+
+            if (requestCode==REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_FROM){
+                mCalendarFrom.set(Calendar.YEAR
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_YEAR,0));
+
+                mCalendarFrom.set(Calendar.MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_MONTH,0));
+
+                mCalendarFrom.set(Calendar.DAY_OF_MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_DAY,0));
+
+            }
+
+            else if (requestCode==REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_FROM){
+                mCalendarFrom.set(Calendar.HOUR
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_HOUR,0));
+
+                mCalendarFrom.set(Calendar.MINUTE
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_MINUTES,0));
+
+            }
+
+            else if (requestCode==REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_TO){
+                mCalendarTo.set(Calendar.YEAR
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_YEAR,0));
+
+                mCalendarTo.set(Calendar.MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_MONTH,0));
+
+                mCalendarTo.set(Calendar.DAY_OF_MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_DAY,0));
+
+
+            }
+
+            else if (requestCode==REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_TO){
+                mCalendarTo.set(Calendar.HOUR
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_HOUR,0));
+
+                mCalendarTo.set(Calendar.MINUTE
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_MINUTES,0));
+
+            }
+
+        }
+    }
+
+    @Override
+    public void updateRecyclerView() {
+    mTaskRecyclerViewAdapter.setTaskList(
+            mTaskViewModel.getListTask(mCalendarFrom.getTime()
+                    ,mCalendarTo.getTime()
+                    ,mFragmentSearchTaskBinding.editTextTextTitle.getText().toString()
+                    ,mFragmentSearchTaskBinding.editTextTextDescription.getText().toString())
+    );
+
+    mTaskRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

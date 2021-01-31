@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.taskmanager.R;
 import com.example.taskmanager.databinding.FragmentLoginBinding;
 import com.example.taskmanager.veiwmodel.LoginViewModel;
+import com.example.taskmanager.veiwmodel.MainViewModel;
 
 public class LoginFragment extends Fragment {
     //region static method and variable
@@ -26,6 +27,8 @@ public class LoginFragment extends Fragment {
 
     FragmentLoginBinding mFragmentLoginBinding;
     LoginViewModel mLoginViewModelViewModel;
+    MainViewModel mMainViewModel;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class LoginFragment extends Fragment {
                 R.layout.fragment_login, container, false);
         setListners();
         mLoginViewModelViewModel = new LoginViewModel();
+        mMainViewModel=new MainViewModel(getContext());
         return mFragmentLoginBinding.getRoot();
     }
 
@@ -47,7 +51,8 @@ public class LoginFragment extends Fragment {
         mFragmentLoginBinding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLoginViewModelViewModel.LoginButtonClicked(getActivity(),
+                mMainViewModel
+                        .LoginButtonClicked(getActivity(),
                         mFragmentLoginBinding.editTextUserName.getText().toString()
                         , mFragmentLoginBinding.editTextPassword.getText().toString());
             }
@@ -61,6 +66,4 @@ public class LoginFragment extends Fragment {
             }
         });
     }
-
-
 }

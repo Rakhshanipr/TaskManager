@@ -72,7 +72,7 @@ public class TimePickerFragment extends DialogFragment {
                         ,mFragmentTimePickerBinding.timePickerTime.getMinute());
 
                 Fragment fragment = getTargetFragment();
-                fragment.onActivityResult(AddTaskFragment.REQUEST_CODE_TIME_PICKER_FRAGMENT
+                fragment.onActivityResult(getTargetRequestCode()
                         , Activity.RESULT_OK, intent);
                 getDialog().dismiss();
             }

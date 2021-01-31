@@ -20,12 +20,13 @@ import com.example.taskmanager.services.model.State;
 import com.example.taskmanager.services.model.Task;
 import com.example.taskmanager.services.repository.TaskRepository;
 import com.example.taskmanager.services.repository.UserRepository;
+import com.example.taskmanager.veiwmodel.ListRecyclerViewTaskViewModel;
 import com.example.taskmanager.veiwmodel.MainViewModel;
 import com.example.taskmanager.veiwmodel.TaskViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
-public class ListTaskFragment extends Fragment {
+public class ListTaskFragment extends Fragment implements ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter {
 
     //region defind static method and variable
     public static final String ARGS_INT_STATE = "com.example.taskmanager.view.fragment.ListTaskFragment.int_state";
@@ -46,6 +47,8 @@ public class ListTaskFragment extends Fragment {
     //region defind variable
     FragmentListTaskBinding mFragmentListTaskBinding;
     State mState;
+
+    MainViewModel mMainViewModel;
     TaskViewModel mTaskViewModel;
 
     //endregion
@@ -88,10 +91,18 @@ public class ListTaskFragment extends Fragment {
                 addTaskFragment.show(getFragmentManager(), TAG_SHOW_FRAGMENT_ADD_TASK);
             }
         });
+
+        mFragmentListTaskBinding.floatingActionButtonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMainViewModel.SearchButtonClicked(getActivity());
+            }
+        });
     }
 
     private void setInitial() {
         mTaskViewModel = new TaskViewModel();
+        mMainViewModel=new MainViewModel(getActivity());
 
         int state = getArguments().getInt(ARGS_INT_STATE);
         mState = State.values()[state];
@@ -99,18 +110,21 @@ public class ListTaskFragment extends Fragment {
 
         mFragmentListTaskBinding.recyclerviewListTask.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mFragmentListTaskBinding.recyclerviewListTask.setAdapter(
-                mTaskViewModel.createTaskRecyclerViewAdapter(getContext()
+                mTaskViewModel.createTaskRecyclerViewAdapter(getActivity()
                         , mState,ListTaskFragment.this,getFragmentManager()));
     }
 
-    public void updateAdapter() {
+
+
+    @Override
+    public void updateRecyclerView() {
         int state = getArguments().getInt(ARGS_INT_STATE);
         mState = State.values()[state];
 
         mFragmentListTaskBinding.recyclerviewListTask.setAdapter(
-                mTaskViewModel.createTaskRecyclerViewAdapter(getContext()
+                mTaskViewModel.createTaskRecyclerViewAdapter(getActivity()
                         , mState
-                ,ListTaskFragment.this
-                ,getFragmentManager()));
+                        ,ListTaskFragment.this
+                        ,getFragmentManager()));
     }
 }

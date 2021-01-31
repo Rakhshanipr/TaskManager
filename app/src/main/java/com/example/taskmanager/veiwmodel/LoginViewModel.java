@@ -22,7 +22,7 @@ public class LoginViewModel {
 
     UserRepository mUserRepository;
     TaskRepository mTaskRepository;
-    ICallBacks mCallBacks;
+
     //endregion
     public static MutableLiveData<String> name = new MutableLiveData<>();
 
@@ -73,24 +73,6 @@ public class LoginViewModel {
     }
 
 
-    public void LoginButtonClicked(Activity activity, String userName, String password) {
-        if (mUserRepository.isValid(userName, password)) {
 
-            mUserRepository.setsOnlineUser(mUserRepository.retValidUser(userName, password));
-
-
-            if (activity instanceof ICallBacks) {
-                mCallBacks = (ICallBacks) activity;
-            } else {
-                throw new ClassCastException("your activity must implemented ICallBacks");
-            }
-            mCallBacks.Logined(mUserRepository.getsOnlineUser());
-        }
-    }
-
-
-    public interface ICallBacks {
-        void Logined(User user);
-    }
 
 }
