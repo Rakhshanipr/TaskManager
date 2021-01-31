@@ -18,6 +18,7 @@ import com.example.taskmanager.databinding.FragmentEditTaskBinding;
 import com.example.taskmanager.services.model.State;
 import com.example.taskmanager.services.model.Task;
 import com.example.taskmanager.services.repository.UserRepository;
+import com.example.taskmanager.veiwmodel.ListRecyclerViewTaskViewModel;
 import com.example.taskmanager.veiwmodel.TaskViewModel;
 
 import java.util.Calendar;
@@ -115,9 +116,11 @@ public class EditTaskFragment extends DialogFragment {
                 task.setState(state);
                 mTaskViewModel.updateTask(task);
 
-                ListTaskFragment listTaskFragment=(ListTaskFragment) getTargetFragment();
-                listTaskFragment.onActivityResult(ListTaskFragment.REQUEST_CODE_SHOW_EDIT_TASK_FRAGMENT
-                        , Activity.RESULT_OK,null);
+                if (getTargetFragment() instanceof
+                        ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter)
+                {
+                    ((ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter)getTargetFragment()).updateRecyclerView();
+                }
 
                 //endregion
                 getDialog().dismiss();

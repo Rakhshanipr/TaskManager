@@ -134,7 +134,7 @@ public class TaskRepository {
                 taskListResult.add(task);
             }
         }
-        return sTaskList;
+        return taskListResult;
     }
 
     public void deletWithState(State state, User user) {

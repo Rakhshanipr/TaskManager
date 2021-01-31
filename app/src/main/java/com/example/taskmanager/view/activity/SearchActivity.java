@@ -9,9 +9,11 @@ import android.os.Bundle;
 import com.example.taskmanager.R;
 import com.example.taskmanager.databinding.ActivitySearchBinding;
 import com.example.taskmanager.databinding.ActivityViewPagerBinding;
+import com.example.taskmanager.services.model.User;
+import com.example.taskmanager.veiwmodel.MainViewModel;
 import com.example.taskmanager.view.fragment.SearchTaskFragment;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements MainViewModel.ICallBacksMainViewModel {
 
     //region defind static method and variable
 
@@ -39,5 +41,20 @@ public class SearchActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(R.id.container_search,SearchTaskFragment.newInstance())
                 .commit();
+    }
+
+    @Override
+    public void startSahreActivity(Intent intet) {
+        startActivity(intet);
+    }
+
+    @Override
+    public void Logined(User user) {
+
+    }
+
+    @Override
+    public void showActivity(Intent intent) {
+
     }
 }

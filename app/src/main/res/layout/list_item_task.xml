@@ -108,7 +108,7 @@
             android:layout_height="42dp"
             android:layout_marginEnd="8dp"
             android:background="#A797C8"
-            android:foreground="@android:drawable/ic_menu_share"
+            android:foreground="@drawable/radius"
             android:onClick="@{()->ListRecyclerViewTaskViewModel.share()}"
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/imageButton_edit"

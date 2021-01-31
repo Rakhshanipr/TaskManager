@@ -26,7 +26,8 @@ import com.example.taskmanager.veiwmodel.TaskViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
-public class ListTaskFragment extends Fragment implements ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter {
+public class ListTaskFragment extends Fragment
+        implements ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter {
 
     //region defind static method and variable
     public static final String ARGS_INT_STATE = "com.example.taskmanager.view.fragment.ListTaskFragment.int_state";

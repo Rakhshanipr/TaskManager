@@ -26,7 +26,8 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class SearchTaskFragment extends Fragment implements ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter {
+public class SearchTaskFragment extends Fragment
+        implements ListRecyclerViewTaskViewModel.ICallBacksRecyclerViewAdapter {
 
     //region defind static method and variable
     public static final int REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_FROM = 0;
@@ -84,7 +85,76 @@ public class SearchTaskFragment extends Fragment implements ListRecyclerViewTask
         return mFragmentSearchTaskBinding.getRoot();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== Activity.RESULT_OK){
+
+            if (requestCode==REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_FROM){
+                mCalendarFrom.set(Calendar.YEAR
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_YEAR,0));
+
+                mCalendarFrom.set(Calendar.MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_MONTH,0));
+
+                mCalendarFrom.set(Calendar.DAY_OF_MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_DAY,0));
+
+            }
+
+            else if (requestCode==REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_FROM){
+                mCalendarFrom.set(Calendar.HOUR
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_HOUR,0));
+
+                mCalendarFrom.set(Calendar.MINUTE
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_MINUTES,0));
+
+            }
+
+            else if (requestCode==REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_TO){
+                mCalendarTo.set(Calendar.YEAR
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_YEAR,0));
+
+                mCalendarTo.set(Calendar.MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_MONTH,0));
+
+                mCalendarTo.set(Calendar.DAY_OF_MONTH
+                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_DAY,0));
+
+
+            }
+
+            else if (requestCode==REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_TO){
+                mCalendarTo.set(Calendar.HOUR
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_HOUR,0));
+
+                mCalendarTo.set(Calendar.MINUTE
+                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_MINUTES,0));
+
+            }
+
+        }
+    }
+
+    @Override
+    public void updateRecyclerView() {
+        mFragmentSearchTaskBinding.recylerViewListTaskSearch.setAdapter(
+                new TaskRecyclerViewAdapter(getActivity()
+                        ,mTaskViewModel.getListTask(mCalendarFrom.getTime(),mCalendarTo.getTime()
+                        ,mFragmentSearchTaskBinding.editTextTextTitle.getText().toString()
+                         ,mFragmentSearchTaskBinding.editTextTextDescription.getText().toString())
+                        ,SearchTaskFragment.this,getFragmentManager())
+        );
+    }
+
+
     private void setInitial() {
+
+        mCalendarFrom=Calendar.getInstance();
+        mCalendarTo=Calendar.getInstance();
+
+        mTaskViewModel=new TaskViewModel();
+
         mFragmentSearchTaskBinding.recylerViewListTaskSearch.setLayoutManager(new LinearLayoutManager(getContext()));
         mTaskRecyclerViewAdapter=new TaskRecyclerViewAdapter(getActivity()
                 ,new ArrayList<Task>()
@@ -150,66 +220,5 @@ public class SearchTaskFragment extends Fragment implements ListRecyclerViewTask
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode== Activity.RESULT_OK){
 
-            if (requestCode==REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_FROM){
-                mCalendarFrom.set(Calendar.YEAR
-                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_YEAR,0));
-
-                mCalendarFrom.set(Calendar.MONTH
-                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_MONTH,0));
-
-                mCalendarFrom.set(Calendar.DAY_OF_MONTH
-                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_DAY,0));
-
-            }
-
-            else if (requestCode==REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_FROM){
-                mCalendarFrom.set(Calendar.HOUR
-                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_HOUR,0));
-
-                mCalendarFrom.set(Calendar.MINUTE
-                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_MINUTES,0));
-
-            }
-
-            else if (requestCode==REQUEST_CODE_DATE_PIKER_FRAGMENT_SEARCH_TO){
-                mCalendarTo.set(Calendar.YEAR
-                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_YEAR,0));
-
-                mCalendarTo.set(Calendar.MONTH
-                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_MONTH,0));
-
-                mCalendarTo.set(Calendar.DAY_OF_MONTH
-                        ,data.getIntExtra(DatePickerFragment.BUNDLE_DATE_PICKER_FRAGMENT_DAY,0));
-
-
-            }
-
-            else if (requestCode==REQUEST_CODE_TIME_PIKER_FRAGMENT_SEARCH_TO){
-                mCalendarTo.set(Calendar.HOUR
-                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_HOUR,0));
-
-                mCalendarTo.set(Calendar.MINUTE
-                        ,data.getIntExtra(TimePickerFragment.BUNDLE_TIME_PICKER_FRAGMENT_MINUTES,0));
-
-            }
-
-        }
-    }
-
-    @Override
-    public void updateRecyclerView() {
-    mTaskRecyclerViewAdapter.setTaskList(
-            mTaskViewModel.getListTask(mCalendarFrom.getTime()
-                    ,mCalendarTo.getTime()
-                    ,mFragmentSearchTaskBinding.editTextTextTitle.getText().toString()
-                    ,mFragmentSearchTaskBinding.editTextTextDescription.getText().toString())
-    );
-
-    mTaskRecyclerViewAdapter.notifyDataSetChanged();
-    }
 }
