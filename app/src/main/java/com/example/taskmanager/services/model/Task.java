@@ -1,19 +1,33 @@
 package com.example.taskmanager.services.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 import java.util.UUID;
+import java.util.jar.Attributes;
 
+@Entity
 public class Task {
+
+    @PrimaryKey
+    @ColumnInfo(name = "Id")
     private UUID mId;
 
+    @ColumnInfo(name = "Title")
     private String mTitle;
 
+    @ColumnInfo(name = "Describe")
     private String mDescribe;
 
+    @ColumnInfo(name = "State")
     private State mState;
 
+    @ColumnInfo(name = "Date")
     private Date mDate;
 
+    @ColumnInfo(name = "User")
     private UUID mUser;
 
     public Task() {

@@ -1,11 +1,23 @@
 package com.example.taskmanager.services.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+
 import java.util.UUID;
 
+@Entity
 public class User {
+
+    @ColumnInfo(name = "Id")
     UUID mId;
+
+    @ColumnInfo(name = "UserName")
     String mUserName;
+
+    @ColumnInfo(name = "Password")
     String mPassword;
+
+    @ColumnInfo(name = "Accessblity")
     int mAccessblity;
 
     public User(String userName, String password, int accessblity) {
