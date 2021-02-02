@@ -33,8 +33,8 @@ public class MainViewModel {
     }
 
     public MainViewModel(Context context) {
-        mTaskRepository=TaskRepository.getInstance();
-        mUserRepository=UserRepository.getInstance();
+        mTaskRepository=TaskRepository.getInstance(context);
+        mUserRepository=UserRepository.getInstance(context);
         mContext=context;
     }
 

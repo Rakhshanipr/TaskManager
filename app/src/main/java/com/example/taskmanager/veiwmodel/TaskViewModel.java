@@ -31,8 +31,8 @@ public class TaskViewModel {
     static FragmentManager mFragmentManager;
     //endregion
 
-    public TaskViewModel() {
-        mTaskRepository=TaskRepository.getInstance();
+    public TaskViewModel(Context context) {
+        mTaskRepository=TaskRepository.getInstance(context);
     }
 
     public void addTask(Task task){

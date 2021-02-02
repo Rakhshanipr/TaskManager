@@ -34,4 +34,7 @@ public interface TaskDAO {
     @Query("SELECT * FROM Task WHERE User=:user")
     List<Task> getList(UUID user);
 
+    @Query("SELECT * FROM Task")
+    List<Task> getList();
+
 }

@@ -54,7 +54,7 @@ public class UserFragment extends DialogFragment {
     }
 
     private void initial() {
-        mUserViewModel=new UserViewModel();
+        mUserViewModel=new UserViewModel(getContext());
     }
 
     private void setListners() {

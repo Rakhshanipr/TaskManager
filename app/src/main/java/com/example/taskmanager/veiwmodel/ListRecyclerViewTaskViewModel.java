@@ -40,7 +40,7 @@ public class ListRecyclerViewTaskViewModel {
         mTask = task;
         mTargetFragment = targetFragment;
         mFragmentManager = fragmentManager;
-        mTaskViewModel = new TaskViewModel();
+        mTaskViewModel = new TaskViewModel(activity.getApplicationContext());
         mActivity=activity;
         mMainViewModel = new MainViewModel(activity.getApplicationContext());
     }

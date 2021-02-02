@@ -1,13 +1,16 @@
 package com.example.taskmanager.services.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.UUID;
 
 @Entity
 public class User {
-
+    @NonNull
+    @PrimaryKey
     @ColumnInfo(name = "Id")
     UUID mId;
 
@@ -25,6 +28,10 @@ public class User {
         this.mPassword = password;
         this.mAccessblity = accessblity;
         mId=UUID.randomUUID();
+    }
+
+    public void setId(UUID id) {
+        mId = id;
     }
 
     public UUID getId() {

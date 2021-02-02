@@ -102,7 +102,7 @@ public class ListTaskFragment extends Fragment
     }
 
     private void setInitial() {
-        mTaskViewModel = new TaskViewModel();
+        mTaskViewModel = new TaskViewModel(getContext());
         mMainViewModel=new MainViewModel(getActivity());
 
         int state = getArguments().getInt(ARGS_INT_STATE);

@@ -153,7 +153,7 @@ public class SearchTaskFragment extends Fragment
         mCalendarFrom=Calendar.getInstance();
         mCalendarTo=Calendar.getInstance();
 
-        mTaskViewModel=new TaskViewModel();
+        mTaskViewModel=new TaskViewModel(getContext());
 
         mFragmentSearchTaskBinding.recylerViewListTaskSearch.setLayoutManager(new LinearLayoutManager(getContext()));
         mTaskRecyclerViewAdapter=new TaskRecyclerViewAdapter(getActivity()

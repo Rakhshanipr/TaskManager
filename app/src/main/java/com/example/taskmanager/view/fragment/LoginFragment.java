@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment {
         mFragmentLoginBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_login, container, false);
         setListners();
-        mLoginViewModelViewModel = new LoginViewModel();
+        mLoginViewModelViewModel = new LoginViewModel(getContext());
         mMainViewModel=new MainViewModel(getContext());
         return mFragmentLoginBinding.getRoot();
     }

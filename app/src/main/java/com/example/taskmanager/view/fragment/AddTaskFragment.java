@@ -152,6 +152,6 @@ public class AddTaskFragment extends DialogFragment {
 
     private void initial() {
         mCalender=Calendar.getInstance();
-        mTaskViewModel=new TaskViewModel();
+        mTaskViewModel=new TaskViewModel(getContext());
     }
 }

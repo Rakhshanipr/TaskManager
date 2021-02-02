@@ -160,7 +160,7 @@ public class EditTaskFragment extends DialogFragment {
 
     private void initial() {
         mCalender=Calendar.getInstance();
-        mTaskViewModel=new TaskViewModel();
+        mTaskViewModel=new TaskViewModel(getContext());
 
         UUID uuid=UUID.fromString(getArguments().getString(ARGS_SET_TASK_ID,""));
         Task task=mTaskViewModel.getTask(uuid);

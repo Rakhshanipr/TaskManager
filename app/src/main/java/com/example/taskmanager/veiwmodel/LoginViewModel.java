@@ -1,6 +1,7 @@
 package com.example.taskmanager.veiwmodel;
 
 import android.app.Activity;
+import android.content.Context;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
@@ -26,9 +27,9 @@ public class LoginViewModel {
     //endregion
     public static MutableLiveData<String> name = new MutableLiveData<>();
 
-    public LoginViewModel() {
-        mUserRepository = UserRepository.getInstance();
-        mTaskRepository=TaskRepository.getInstance();
+    public LoginViewModel(Context context) {
+        mUserRepository = UserRepository.getInstance(context);
+        mTaskRepository=TaskRepository.getInstance(context);
         //region defind func to test
         User user=new User("ali", "123", 1);
         mUserRepository.add(user);
