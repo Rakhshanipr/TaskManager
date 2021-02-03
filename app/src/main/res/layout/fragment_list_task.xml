@@ -12,7 +12,7 @@
         android:id="@+id/recyclerview_list_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#B7ADD1" />
+        android:background="#BE5CE8" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_add"
@@ -20,27 +20,29 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="#A8C8AA"
+        android:backgroundTint="#983415"
         android:clickable="true"
+        android:foreground="@android:drawable/ic_input_add"
+        android:tint="#F8F8F8"
         app:fabCustomSize="45dp"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="#9A6868"
-        app:srcCompat="@drawable/add_task_512" />
+        app:rippleColor="#9A6868" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#4DF4E1"
+        android:backgroundTint="#4FA59B"
         android:clickable="true"
+        android:tint="#FFFFFF"
         app:fabCustomSize="45dp"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton_add"
         app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_add"
-        app:rippleColor="#9A6868"
+        app:rippleColor="#FFFFFF"
         app:srcCompat="@android:drawable/ic_search_category_default" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
