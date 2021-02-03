@@ -1,8 +1,16 @@
 # TaskManager
 this a project Task manager
-with MVVM Architecture\n
-DataBinding\n
-Room dataBase\n
+
+
+with MVVM Architecture
+
+
+DataBinding
+
+
+Room dataBase
+
+
 Obsever and Singltone DesignPattern
 
 
