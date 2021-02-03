@@ -18,15 +18,15 @@ Update soon...
 
 
 <p align="center">
-  <img src="https://s16.picofile.com/file/8423778150/Screenshot_20210203_151825.jpg" height="400" width="200" title="hover text">
+  <img src="https://s16.picofile.com/file/8423778150/Screenshot_20210203_151825.jpg" height="390" width="200" title="hover text">
   
-  <img src="https://s16.picofile.com/file/8423778168/Screenshot_20210203_152026.jpg" height="400" width="200" title="hover text">
+  <img src="https://s16.picofile.com/file/8423778168/Screenshot_20210203_152026.jpg" height="390" width="200" title="hover text">
 
-  <img src="https://s16.picofile.com/file/8423778176/Screenshot_20210203_152039.jpg" height="400" width="200" title="hover text">
+  <img src="https://s16.picofile.com/file/8423778176/Screenshot_20210203_152039.jpg" height="390" width="200" title="hover text">
 <br>
-  <img src="https://s17.picofile.com/file/8423778218/Screenshot_20210203_152150.jpg" height="400" width="200"  title="hover text">
+  <img src="https://s17.picofile.com/file/8423778218/Screenshot_20210203_152150.jpg" height="390" width="200"  title="hover text">
 <
-  <img src="https://s17.picofile.com/file/8423778226/Screenshot_20210203_152201.jpg" height="400" width="200" title="hover text">
+  <img src="https://s17.picofile.com/file/8423778226/Screenshot_20210203_152201.jpg" height="390" width="200" title="hover text">
 
 
 
