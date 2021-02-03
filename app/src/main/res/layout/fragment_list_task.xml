@@ -12,7 +12,7 @@
         android:id="@+id/recyclerview_list_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BE5CE8" />
+        android:background="@drawable/ombre_teal_and_white_background__1_" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_add"
