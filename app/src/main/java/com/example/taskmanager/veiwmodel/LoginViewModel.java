@@ -31,7 +31,7 @@ public class LoginViewModel {
         mUserRepository = UserRepository.getInstance(context);
         mTaskRepository=TaskRepository.getInstance(context);
         //region defind func to test
-        User user=new User("ali", "123", 1);
+        /*User user=new User("ali", "123", 1);
         mUserRepository.add(user);
         UserRepository.setsOnlineUser(user);
         mTaskRepository.add(new Task("university"
@@ -69,7 +69,7 @@ public class LoginViewModel {
         mTaskRepository.add(new Task("Neda"
                 ,"Complete mobile network"
                 , State.ToDo, new Date()
-                ,UserRepository.getsOnlineUser().getId()));
+                ,UserRepository.getsOnlineUser().getId()));*/
         //endregion
     }
 

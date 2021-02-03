@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:background="#62A5E8">
 
         <DatePicker
             android:id="@+id/datePicker_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:background="#858181"
-            android:backgroundTint="#858181"
+            android:backgroundTint="#B5ABAB"
             android:calendarTextColor="#0C0C0C"
-            android:headerBackground="@color/cardview_dark_background"
+            android:headerBackground="#5D8A85"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,15 +25,20 @@
 
         <Button
             android:id="@+id/button_cancel"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:background="#66BD6A"
-            android:backgroundTint="#86CDD5"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round"
+            android:backgroundTint="#7DBF7F"
+            android:drawableLeft="@android:drawable/ic_menu_revert"
+            android:drawablePadding="-15dp"
+            android:fontFamily="casual"
             android:text="Cancel"
             android:textAllCaps="false"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/datePicker_date"
             app:layout_constraintTop_toBottomOf="@+id/datePicker_date"
@@ -42,14 +46,20 @@
 
         <Button
             android:id="@+id/button_save"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:background="#66BD6A"
-            android:backgroundTint="#86CDD5"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/round"
+            android:backgroundTint="#7DBF7F"
+            android:drawableLeft="@android:drawable/ic_menu_send"
+            android:drawablePadding="-15dp"
+            android:fontFamily="casual"
             android:text="Save"
             android:textAllCaps="false"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/datePicker_date"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/button_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/button_cancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

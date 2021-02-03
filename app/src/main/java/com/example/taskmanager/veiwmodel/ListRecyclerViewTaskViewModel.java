@@ -68,8 +68,6 @@ public class ListRecyclerViewTaskViewModel {
     public String getDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(mTask.getDate());
-
-        int n = calendar.get(Calendar.MONTH);
         String date = calendar.get(Calendar.YEAR) + " / " + calendar.get(Calendar.DAY_OF_MONTH) + " / " + calendar.get(Calendar.MONTH)
                 + "     " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + " " + ((calendar.get(Calendar.AM_PM) == 0) ? "AM" : "PM");
         ;
